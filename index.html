@@ -3,13 +3,107 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Korean Steps — Developer Site</title>
+<title>Korean Steps: Learn Korean — Official Site</title>
+<meta name="description" content="Learn Korean step by step with Korean Steps — 1,000 bite-size lessons, games, a picture wordbook and TOPIK mock exams. Free on Google Play.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#58cc02; --green-dark:#46a302; --blue:#1cb0f6; --blue-dark:#1899d6;
+    --yellow:#ffc800; --pink:#ff4b4b; --ink:#3c3c3c; --muted:#777;
+    --line:#e5e5e5; --green-soft:#d7ffb8; --blue-soft:#ddf4ff; --yellow-soft:#fff3c4; --pink-soft:#ffdfe0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:#fff}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  header{border-bottom:2px solid var(--line)}
+  .bar{display:flex;align-items:center;gap:12px;padding:14px 0}
+  .bar img{width:44px;height:44px;object-fit:contain}
+  .brand{font-weight:900;font-size:22px;letter-spacing:.2px}
+  .brand span{color:var(--green)}
+  .bar .sp{flex:1}
+  .btn{display:inline-block;background:var(--green);color:#fff;font-weight:900;text-decoration:none;
+       padding:12px 22px;border-radius:14px;box-shadow:0 4px 0 var(--green-dark);font-size:16px}
+  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--green-dark)}
+  .btn.blue{background:var(--blue);box-shadow:0 4px 0 var(--blue-dark)}
+  .btn.small{padding:9px 16px;font-size:14px}
+  .hero{display:flex;align-items:center;gap:28px;padding:52px 0 40px;flex-wrap:wrap}
+  .hero .txt{flex:1 1 340px}
+  .hero h1{font-size:44px;line-height:1.12;font-weight:900;margin:0 0 14px}
+  .hero h1 .g{color:var(--green)} .hero h1 .b{color:var(--blue)}
+  .hero p{font-size:18px;color:var(--muted);font-weight:600;margin:0 0 24px;line-height:1.55}
+  .hero .pic{flex:0 1 300px;text-align:center}
+  .hero .pic img{width:min(300px,72vw);height:auto}
+  .langs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px}
+  .chip{font-weight:900;font-size:13px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);color:var(--muted)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding:14px 0 8px}
+  .card{border:2px solid var(--line);border-radius:18px;padding:20px}
+  .card .ic{font-size:30px;width:58px;height:58px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:12px}
+  .card h3{margin:0 0 6px;font-size:18px;font-weight:900}
+  .card p{margin:0;color:var(--muted);font-weight:600;line-height:1.5;font-size:15px}
+  .band{background:var(--blue-soft);border-radius:20px;padding:28px;margin:30px 0;text-align:center}
+  .band h2{margin:0 0 8px;font-size:26px;font-weight:900}
+  .band p{margin:0 0 18px;color:#4a6b7a;font-weight:700}
+  footer{border-top:2px solid var(--line);margin-top:44px;padding:22px 0 34px;color:var(--muted);font-weight:600;font-size:14px}
+  footer a{color:var(--blue-dark);text-decoration:none;font-weight:800}
+</style>
 </head>
 <body>
-<h1>Korean Steps: Learn Korean</h1>
-<p>Official developer site for the Korean Steps Android app by Ben Hangul.</p>
-<p>Get the app on Google Play:
-<a href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Korean Steps on Google Play</a></p>
-<p>Package: com.benhangul.koreansteps</p>
+<header>
+  <div class="wrap bar">
+    <img src="chick.png" alt="Korean Steps chick mascot">
+    <div class="brand">Korean <span>Steps</span></div>
+    <div class="sp"></div>
+    <a class="btn blue small" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Get the app</a>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="txt">
+      <h1>Learn Korean,<br><span class="g">one step</span> at a <span class="b">time</span> 🐥</h1>
+      <p>Start with Hangul, build up to words and full sentences, and hold your first real conversation — 1,000 bite-size lessons in 100 units, from your very first letter to TOPIK-level Korean.</p>
+      <a class="btn" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">▶ Free on Google Play</a>
+      <div class="langs">
+        <span class="chip">🇺🇸 English</span><span class="chip">🇪🇸 Español</span><span class="chip">🇧🇷 Português</span>
+      </div>
+    </div>
+    <div class="pic"><img src="chick.png" alt="The Korean Steps chick"></div>
+  </section>
+
+  <section class="grid">
+    <div class="card"><div class="ic" style="background:var(--green-soft)">📚</div>
+      <h3>1,000 step-by-step lessons</h3>
+      <p>100 units structured by TOPIK 1–4 (A1–B2), with a TOPIK-style quiz after every lesson.</p></div>
+    <div class="card"><div class="ic" style="background:var(--blue-soft)">🖼️</div>
+      <h3>Picture wordbook</h3>
+      <p>498 illustrated words with pronunciation and audio, plus a full catalog of 11,000+ course words and phrases.</p></div>
+    <div class="card"><div class="ic" style="background:var(--yellow-soft)">🎮</div>
+      <h3>Play while you learn</h3>
+      <p>Chick Kitchen, Word Speed, Typing Game, Falling Words, Hangul Run — and weekly leaderboards with medals.</p></div>
+    <div class="card"><div class="ic" style="background:var(--pink-soft)">📝</div>
+      <h3>Level tests &amp; TOPIK exams</h3>
+      <p>Real mock exams for all 4 TOPIK levels that score you only at the end — just like the real test.</p></div>
+    <div class="card"><div class="ic" style="background:var(--green-soft)">👑</div>
+      <h3>Dress your chick, climb the ranks</h3>
+      <p>Earn coins, unlock outfits, and rise through 10 ranks from Peasant to Emperor.</p></div>
+    <div class="card"><div class="ic" style="background:var(--blue-soft)">📴</div>
+      <h3>Offline &amp; in sync</h3>
+      <p>Works offline after the first load, and Google sign-in syncs your progress across devices.</p></div>
+  </section>
+
+  <section class="band">
+    <h2>Your first lesson is one tap away</h2>
+    <p>Free to download. No account needed to start.</p>
+    <a class="btn" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Start learning Korean</a>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    © 2026 Ben Hangul · Korean Steps (com.benhangul.koreansteps)<br>
+    Support: <a href="mailto:swaggybr@naver.com">swaggybr@naver.com</a>
+  </div>
+</footer>
 </body>
 </html>
