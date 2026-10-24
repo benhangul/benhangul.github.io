@@ -151,7 +151,7 @@ const FIREBASE_CONFIG = {
           if(msg && !/cancel/i.test(msg)) alert('Sign-in failed: '+msg+'\n\nIf this mentions an unauthorized domain, add koreansteps.com in Firebase Console > Authentication > Settings > Authorized domains.');
         });
         siteAuth.onAuthStateChanged(function(user){
-          if(user){ btn.textContent='Sign out'; btn.title='Signed in as '+(user.email||''); }
+          if(user){ var nm=((user.displayName||(user.email?user.email.split('@')[0]:'')||'Account')+'').trim(); btn.textContent='👤 '+nm; btn.title='Signed in as '+(user.email||'')+' - click to sign out'; }
           else{ btn.textContent='Login'; btn.title=''; }
           btn.disabled=false;
         });
@@ -159,8 +159,16 @@ const FIREBASE_CONFIG = {
           if(siteAuth.currentUser){ siteAuth.signOut(); }
           else{
             btn.disabled=true;
-            siteAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()).catch(function(e){
-              btn.disabled=false; alert('Sign-in failed: '+String((e&&e.message)||e));
+            var prov=new firebase.auth.GoogleAuthProvider();
+            siteAuth.signInWithPopup(prov).then(function(){ btn.disabled=false; }).catch(function(e){
+              var code=(e&&e.code)||'';
+              if(/popup-blocked|operation-not-supported-in-this-environment/.test(code)){
+                siteAuth.signInWithRedirect(prov).catch(function(e2){ btn.disabled=false; alert('Sign-in failed: '+String((e2&&e2.message)||e2)); });
+              }else if(/popup-closed-by-user|cancelled-popup-request/.test(code)){
+                btn.disabled=false;
+              }else{
+                btn.disabled=false; alert('Sign-in failed: '+String((e&&e.message)||e));
+              }
             });
           }
         });
