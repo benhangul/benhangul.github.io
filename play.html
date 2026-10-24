@@ -26704,7 +26704,7 @@ function hlBeginner(ko) {
           try{
             if(typeof firebase!=='undefined' && firebase.auth){
               const provider=new firebase.auth.GoogleAuthProvider();
-              firebase.auth().signInWithPopup(provider).catch(()=>{});
+              firebase.auth().signInWithRedirect(provider).catch(()=>{});
             }
           }catch(e){}
         }
@@ -31846,16 +31846,17 @@ const FIX_SPOTS={
           return;
         }
         if(!isNativeApp){
-          // Web: Google sign-in via popup (needs this domain in Firebase > Authentication > Settings > Authorized domains)
+          // Web: Google sign-in via redirect — popups are blocked when the app runs
+          // inside the website iframe and failed silently (verified live 2026-10-23);
+          // a redirect survives embedding. Needs this domain in Firebase >
+          // Authentication > Settings > Authorized domains.
           try{
             loginBtn.disabled = true;
             const provider = new firebase.auth.GoogleAuthProvider();
-            await fbAuth.signInWithPopup(provider);
-            toast(t('toast_signed_in'));
+            await fbAuth.signInWithRedirect(provider);
           }catch(e){
             const msg = String((e && e.message) || '') + (e && e.code ? ' [code ' + e.code + ']' : '');
-            if(!/cancel|popup-closed/i.test(msg)) alert(t('alert_signin_failed',{msg:msg}) + '\n\n' + t('alert_signin_domain'));
-          }finally{
+            alert(t('alert_signin_failed',{msg:msg}) + '\n\n' + t('alert_signin_domain'));
             loginBtn.disabled = false;
           }
           return;
@@ -31881,6 +31882,14 @@ const FIX_SPOTS={
           loginBtn.disabled = false;
         }
       });
+      if(!isNativeApp && fbAuth.getRedirectResult){
+        fbAuth.getRedirectResult().then(function(res){
+          if(res && res.user) toast(t('toast_signed_in'));
+        }).catch(function(e){
+          const msg = String((e && e.message) || '') + (e && e.code ? ' [code ' + e.code + ']' : '');
+          if(msg && !/cancel/i.test(msg)) alert(t('alert_signin_failed',{msg:msg}) + '\n\n' + t('alert_signin_domain'));
+        });
+      }
       fbAuth.onAuthStateChanged(user => {
         cloudUid = user ? user.uid : null;
         try{ window._fbUser = user || null; }catch(e){}

@@ -4,31 +4,199 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Korean Steps: Learn Korean — Official Site</title>
-<meta name="description" content="Learn Korean step by step with Korean Steps — 1,000 bite-size lessons, games, a picture wordbook and TOPIK mock exams. Start learning right here in your browser, free.">
+<meta name="description" content="Learn Korean step by step with Korean Steps — 1,000 bite-size lessons, games, a picture wordbook and TOPIK mock exams. Try a real lesson right here, then get the free app on Google Play.">
 <link rel="icon" href="favicon.ico" sizes="any">
 <link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<style>
-  html,body{margin:0;padding:0;height:100%;background:#fff8e9}
-  #app{position:fixed;inset:0;width:100%;height:100%;border:0;display:block}
-  #getApp{position:fixed;right:16px;bottom:16px;z-index:10;display:flex;align-items:center;gap:9px;
-    background:#58cc02;color:#fff;font-family:'Nunito',system-ui,sans-serif;font-weight:900;font-size:15px;
-    text-decoration:none;padding:12px 18px;border-radius:999px;box-shadow:0 4px 0 #46a302,0 10px 24px rgba(30,60,20,.25)}
-  #getApp:active{transform:translateY(3px);box-shadow:0 1px 0 #46a302}
-  #getApp .x{opacity:.85;font-weight:900;padding:2px 4px;margin-right:-6px;cursor:pointer}
-</style>
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#58cc02; --green-dark:#46a302; --blue:#1cb0f6; --blue-dark:#1899d6;
+    --yellow:#ffc800; --pink:#ff4b4b; --ink:#3c3c3c; --muted:#777;
+    --line:#e5e5e5; --green-soft:#d7ffb8; --blue-soft:#ddf4ff; --yellow-soft:#fff3c4; --pink-soft:#ffdfe0;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:#fff}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  header{border-bottom:2px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.96);z-index:50}
+  .bar{display:flex;align-items:center;gap:12px;padding:10px 0}
+  .bar img{width:40px;height:40px;object-fit:contain}
+  .brand{font-weight:900;font-size:21px;letter-spacing:.2px}
+  .brand span{color:var(--green)}
+  .bar .sp{flex:1}
+  .menu{display:flex;align-items:center;gap:4px}
+  .menu a.mlink,.menu button.mlink{font-weight:900;font-size:15px;color:var(--ink);text-decoration:none;padding:8px 12px;border-radius:10px;background:none;border:0;cursor:pointer;font-family:inherit}
+  .menu a.mlink:hover,.menu button.mlink:hover{background:var(--blue-soft)}
+  @media (max-width:560px){ .menu a.mlink,.menu button.mlink{padding:8px 7px;font-size:14px} .brand{font-size:18px} }
+  .btn{display:inline-block;background:var(--green);color:#fff;font-weight:900;text-decoration:none;
+       padding:12px 22px;border-radius:14px;box-shadow:0 4px 0 var(--green-dark);font-size:16px;border:0;cursor:pointer;font-family:inherit}
+  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--green-dark)}
+  .btn.blue{background:var(--blue);box-shadow:0 4px 0 var(--blue-dark)}
+  .btn.ghost{background:#fff;color:var(--blue-dark);border:2px solid var(--blue);box-shadow:0 4px 0 var(--blue-soft)}
+  .btn.small{padding:9px 16px;font-size:14px}
+  .hero{display:block;text-align:center;padding:46px 0 6px}
+  .hero .txt{max-width:680px;margin:0 auto}
+  .hero h1{font-size:44px;line-height:1.12;font-weight:900;margin:0 0 14px}
+  .hero h1 .g{color:var(--green)} .hero h1 .b{color:var(--blue)}
+  .hero p{font-size:18px;color:var(--muted);font-weight:600;margin:0 0 24px;line-height:1.55}
+  .hero p strong{color:var(--ink)}
+  .ctas{display:flex;gap:12px;flex-wrap:wrap;align-items:center;justify-content:center}
+  .langs{display:flex;gap:8px;flex-wrap:wrap;margin-top:18px;justify-content:center}
+  .chip{font-weight:900;font-size:13px;padding:6px 12px;border-radius:999px;border:2px solid var(--line);color:var(--muted)}
+  /* Big playable stage */
+  .stage{padding:34px 0 6px;text-align:center}
+  .stage h2{font-size:30px;font-weight:900;margin:0 0 6px}
+  .stage p{color:var(--muted);font-weight:700;margin:0 0 20px}
+  .phonebox{text-align:center;margin:0 auto}
+  .phone{position:relative;width:min(430px,94vw);aspect-ratio:9/18.6;margin:0 auto;background:#111;
+         border-radius:44px;padding:11px;box-shadow:0 18px 44px rgba(20,40,20,.22),0 0 0 2px #2b2b2b}
+  .screen{position:relative;width:100%;height:100%;border-radius:32px;overflow:hidden;background:#fff8e9}
+  .screen iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:none;background:#fff}
+  .poster{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;padding:22px;cursor:pointer}
+  .poster img{width:118px;height:auto}
+  .poster .pt{font-weight:900;font-size:19px;line-height:1.3}
+  .poster .ps{font-weight:700;font-size:14px;color:var(--muted);line-height:1.45}
+  .playbtn{width:74px;height:74px;border-radius:50%;background:var(--green);box-shadow:0 5px 0 var(--green-dark);
+           display:flex;align-items:center;justify-content:center;color:#fff;font-size:29px;padding-left:5px}
+  .poster:active .playbtn{transform:translateY(3px);box-shadow:0 1px 0 var(--green-dark)}
+  .phonecap{margin-top:14px;font-weight:800;color:var(--muted);font-size:14px}
+  .phonecap strong{color:var(--green-dark)}
+  .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px;padding:14px 0 8px}
+  .card{border:2px solid var(--line);border-radius:18px;padding:20px}
+  .card .ic{font-size:30px;width:58px;height:58px;display:flex;align-items:center;justify-content:center;border-radius:16px;margin-bottom:12px}
+  .card h3{margin:0 0 6px;font-size:18px;font-weight:900}
+  .card p{margin:0;color:var(--muted);font-weight:600;line-height:1.5;font-size:15px}
+  .band{background:var(--blue-soft);border-radius:20px;padding:28px;margin:30px 0;text-align:center}
+  .band h2{margin:0 0 8px;font-size:26px;font-weight:900}
+  .band p{margin:0 0 18px;color:#4a6b7a;font-weight:700}
+  footer{border-top:2px solid var(--line);margin-top:44px;padding:22px 0 34px;color:var(--muted);font-weight:600;font-size:14px}
+  footer a{color:var(--blue-dark);text-decoration:none;font-weight:800}
+</style>
 </head>
 <body>
-<iframe id="app" src="play.html" title="Korean Steps — learn Korean" allow="autoplay"></iframe>
-<a id="getApp" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">
-  📱 Get the app — free <span class="x" id="getAppX" title="Dismiss">✕</span>
-</a>
+<header>
+  <div class="wrap bar">
+    <img src="chick.png" alt="Korean Steps chick mascot">
+    <div class="brand">Korean <span>Steps</span></div>
+    <div class="sp"></div>
+    <nav class="menu">
+      <a class="mlink" href="#play">Lessons</a>
+      <a class="mlink" href="#features">Features</a>
+      <a class="mlink" href="about.html">About</a>
+      <button class="mlink" id="loginLink" type="button">Login</button>
+      <a class="btn blue small" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="txt">
+      <h1>Learn Korean,<br><span class="g">one step</span> at a <span class="b">time</span> 🐥</h1>
+      <p>Start with Hangul, build up to words and full sentences, and hold your first real conversation — 1,000 bite-size lessons in 100 units. <strong>It all runs on your phone</strong> — and you can try a real lesson right here, no install needed.</p>
+      <div class="ctas">
+        <button class="btn" id="tryBtn">▶ Try a lesson now</button>
+        <a class="btn ghost" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Free on Google Play</a>
+      </div>
+      <div class="langs">
+        <span class="chip">🇺🇸 English</span><span class="chip">🇪🇸 Español</span><span class="chip">🇧🇷 Português</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="stage" id="play">
+    <h2>Learn right here — the real app 📚</h2>
+    <p>No install, no sign-up. This is the actual app, running in your browser.</p>
+    <div class="phonebox">
+      <div class="phone">
+        <div class="screen">
+          <div class="poster" id="poster">
+            <img src="chick.png" alt="The Korean Steps chick">
+            <div class="playbtn">▶</div>
+            <div class="pt">Your first lesson,<br>right here</div>
+            <div class="ps">Tap to start — this is the real app,<br>running in your browser.</div>
+          </div>
+          <iframe id="appFrame" title="Korean Steps — playable lesson" allow="autoplay"></iframe>
+        </div>
+      </div>
+      <div class="phonecap">📱 Made for your phone — <strong>free, works offline</strong></div>
+    </div>
+  </section>
+
+  <section class="grid" id="features">
+    <div class="card"><div class="ic" style="background:var(--green-soft)">📚</div>
+      <h3>1,000 step-by-step lessons</h3>
+      <p>100 units structured by TOPIK 1–4 (A1–B2), with a TOPIK-style quiz after every lesson.</p></div>
+    <div class="card"><div class="ic" style="background:var(--blue-soft)">🎙️</div>
+      <h3>Two voices in every lesson</h3>
+      <p>The word and the tip in one voice, the Korean breakdown in a second voice — hear every sound modeled two ways.</p></div>
+    <div class="card"><div class="ic" style="background:var(--yellow-soft)">🎯</div>
+      <h3>A new daily goal every day</h3>
+      <p>Study, games, review, coins — a different goal each morning, and a reward when you hit it.</p></div>
+    <div class="card"><div class="ic" style="background:var(--pink-soft)">🖼️</div>
+      <h3>Picture wordbook</h3>
+      <p>498 illustrated words with pronunciation and audio, plus a full catalog of 11,000+ course words and phrases.</p></div>
+    <div class="card"><div class="ic" style="background:var(--green-soft)">🎮</div>
+      <h3>Play while you learn</h3>
+      <p>Chick Kitchen, Word Speed, Typing Game, Falling Words, Hangul Run — and weekly leaderboards with medals.</p></div>
+    <div class="card"><div class="ic" style="background:var(--blue-soft)">📝</div>
+      <h3>Level tests &amp; TOPIK exams</h3>
+      <p>Real mock exams for all 4 TOPIK levels that score you only at the end — just like the real test.</p></div>
+    <div class="card"><div class="ic" style="background:var(--yellow-soft)">👑</div>
+      <h3>Dress your chick, climb the ranks</h3>
+      <p>Earn coins, unlock outfits, and rise through 10 ranks from Peasant to Emperor.</p></div>
+    <div class="card"><div class="ic" style="background:var(--pink-soft)">📴</div>
+      <h3>Offline &amp; in sync</h3>
+      <p>Works offline after the first load, and Google sign-in syncs your progress across devices.</p></div>
+  </section>
+
+  <section class="band">
+    <h2>Tried it? Take it with you 📱</h2>
+    <p>The full course lives on your phone — free to download, no account needed to start.</p>
+    <a class="btn" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Get Korean Steps on Google Play</a>
+  </section>
+</div>
+
+<footer>
+  <div class="wrap">
+    © 2026 Ben Hangul · Korean Steps (com.benhangul.koreansteps)<br>
+    Support: <a href="mailto:benhangul.steps@gmail.com">benhangul.steps@gmail.com</a>
+  </div>
+</footer>
 <script>
-  document.getElementById('getAppX').addEventListener('click', function(e){
-    e.preventDefault(); e.stopPropagation();
-    document.getElementById('getApp').style.display='none';
+  var started=false;
+  function startApp(){
+    if(started) return; started=true;
+    var f=document.getElementById('appFrame');
+    f.src='play.html';
+    f.style.display='block';
+    document.getElementById('poster').style.display='none';
+  }
+  document.getElementById('poster').addEventListener('click', startApp);
+  document.getElementById('tryBtn').addEventListener('click', function(){
+    startApp();
+    document.getElementById('play').scrollIntoView({behavior:'smooth', block:'start'});
+  });
+  if('IntersectionObserver' in window){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ startApp(); io.disconnect(); } });
+    }, {rootMargin:'400px'});
+    io.observe(document.getElementById('play'));
+  }
+  document.getElementById('loginLink').addEventListener('click', function(){
+    startApp();
+    document.getElementById('play').scrollIntoView({behavior:'smooth', block:'start'});
+    var tries=0;
+    var iv=setInterval(function(){
+      tries++;
+      try{
+        var fw=document.getElementById('appFrame').contentWindow;
+        var lb=fw && fw.document ? fw.document.getElementById('loginBtn') : null;
+        if(lb && typeof fw.firebase!=='undefined'){ lb.hidden=false; lb.click(); clearInterval(iv); }
+      }catch(e){}
+      if(tries>40) clearInterval(iv);
+    }, 500);
   });
 </script>
 </body>
