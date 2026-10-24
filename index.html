@@ -55,6 +55,8 @@
   footer{border-top:2px solid var(--line);margin-top:44px;padding:22px 0 34px;color:var(--muted);font-weight:600;font-size:14px}
   footer a{color:var(--blue-dark);text-decoration:none;font-weight:800}
 </style>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
 </head>
 <body>
 <header>
@@ -63,10 +65,10 @@
     <div class="brand">Korean <span>Steps</span></div>
     <div class="sp"></div>
     <nav class="menu">
-      <a class="mlink" href="play.html">Lessons</a>
+      <a class="mlink" href="lessons.html">Lessons</a>
       <a class="mlink" href="#features">Features</a>
       <a class="mlink" href="about.html">About</a>
-      <a class="mlink" href="play.html?login=1">Login</a>
+      <button class="mlink" id="siteLogin" type="button">Login</button>
       <a class="btn blue small" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Get the app</a>
     </nav>
   </div>
@@ -78,7 +80,7 @@
       <h1>Learn Korean,<br><span class="g">one step</span> at a <span class="b">time</span> 🐥</h1>
       <p>Start with Hangul, build up to words and full sentences, and hold your first real conversation — 1,000 bite-size lessons in 100 units. <strong>It all runs on your phone</strong> — and it runs right here in your browser too, full screen, no install needed.</p>
       <div class="ctas">
-        <a class="btn" href="play.html">▶ Start learning now</a>
+        <a class="btn" href="lessons.html">▶ Start learning now</a>
         <a class="btn ghost" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Free on Google Play</a>
       </div>
       <div class="langs">
@@ -127,5 +129,44 @@
     Support: <a href="mailto:benhangul.steps@gmail.com">benhangul.steps@gmail.com</a>
   </div>
 </footer>
+
+<script>
+const FIREBASE_CONFIG = {
+      apiKey: 'AIzaSyBeemXNPL9CqOtSKFFNBudBGAuDklgqBRg',
+      authDomain: 'korean-steps.firebaseapp.com',
+      projectId: 'korean-steps',
+      storageBucket: 'korean-steps.appspot.com',
+      messagingSenderId: '917121892105',
+      appId: '1:917121892105:android:737c1456b2573821ce9dd8'
+    };
+  var siteAuth=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      if(!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+      siteAuth=firebase.auth();
+      var btn=document.getElementById('siteLogin');
+      if(btn){
+        siteAuth.getRedirectResult().catch(function(e){
+          var msg=String((e&&e.message)||'')+(e&&e.code?' [code '+e.code+']':'');
+          if(msg && !/cancel/i.test(msg)) alert('Sign-in failed: '+msg+'\n\nIf this mentions an unauthorized domain, add koreansteps.com in Firebase Console > Authentication > Settings > Authorized domains.');
+        });
+        siteAuth.onAuthStateChanged(function(user){
+          if(user){ btn.textContent='Sign out'; btn.title='Signed in as '+(user.email||''); }
+          else{ btn.textContent='Login'; btn.title=''; }
+          btn.disabled=false;
+        });
+        btn.addEventListener('click', function(){
+          if(siteAuth.currentUser){ siteAuth.signOut(); }
+          else{
+            btn.disabled=true;
+            siteAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()).catch(function(e){
+              btn.disabled=false; alert('Sign-in failed: '+String((e&&e.message)||e));
+            });
+          }
+        });
+      }
+    }
+  }catch(e){}
+</script>
 </body>
 </html>

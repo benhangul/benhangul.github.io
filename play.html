@@ -31174,7 +31174,7 @@ const FIX_SPOTS={
           state.quizLesson=null;
           // Login nudge: max 3 times total, once per day, when user has progress but isn't logged in
           try{
-            if(!window._fbUser && state.completed.size>0){
+            if(!window._fbUser && state.completed.size>0 && !/[?&]site=1/.test(location.search)){
               const nudgeCount=parseInt(localStorage.getItem('ks-login-nudge-count')||'0',10);
               const lastNudge=localStorage.getItem('ks-login-nudge');
               const today=new Date().toDateString();
@@ -31568,7 +31568,9 @@ const FIX_SPOTS={
     // Show sign-in button (retry if Firebase loads late)
     function showLoginBtn(){
       const lb = document.getElementById('loginBtn');
-      if(lb) lb.hidden = false;
+      // On the website (play.html?site=1) the site header owns sign-in, so the
+      // app's own pill stays hidden there — Ben 2026-10-23: no duplicate.
+      if(lb && !/[?&]site=1/.test(location.search)) lb.hidden = false;
     }
     setTimeout(showLoginBtn, 1000);
     setTimeout(showLoginBtn, 3000);
@@ -31577,7 +31579,7 @@ const FIX_SPOTS={
       const fbAuth = firebase.auth();
       const fbDb = firebase.firestore();
       let cloudUid = null, saveTimer = null;
-      loginBtn.hidden = false;
+      loginBtn.hidden = /[?&]site=1/.test(location.search);
 
       function renderLoginBtn(user){
         // The pill text lives in a <span> so the header marquee can
