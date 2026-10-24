@@ -11,7 +11,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
 <style>
-  :root{ --green:#58cc02; --green-dark:#46a302; --blue:#1cb0f6; --blue-dark:#1899d6; --ink:#3c3c3c; --line:#e5e5e5; --blue-soft:#ddf4ff; }
+  :root{ --green:#58cc02; --green-dark:#46a302; --blue:#1cb0f6; --blue-dark:#1899d6; --ink:#3c3c3c; --line:#e5e5e5; --blue-soft:#ddf4ff; --accent:#1cb0f6; --muted:#777777; }
   *{box-sizing:border-box}
   html,body{height:100%}
   body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:#fff8e9;display:flex;flex-direction:column}
@@ -31,8 +31,63 @@
        padding:12px 22px;border-radius:14px;box-shadow:0 4px 0 var(--green-dark);font-size:16px;border:0;cursor:pointer;font-family:inherit}
   .btn.blue{background:var(--blue);box-shadow:0 4px 0 var(--blue-dark)}
   .btn.small{padding:9px 16px;font-size:14px}
-  .stage{flex:1 1 auto;display:flex;justify-content:center;min-height:0}
-  .stage iframe{width:min(430px,100%);height:100%;border:0;display:block;background:#fff;box-shadow:0 0 44px rgba(120,90,20,.14)}
+  @media (max-width:700px){ .menu a.hideS{display:none} }
+  /* The app's own blue status bar, transplanted into this header on login
+     (Ben 2026-10-23: "원래있던것처럼" — the original bar itself, not new chips).
+     Rules below mirror the app's status-bar CSS; the bar node is a live clone
+     of the app's .status-box with its ids swapped to data-oid. */
+  /* Mini version of the bar, sitting small beside the brand in the top bar
+     (Ben 2026-10-23: "korean steps 상단바 옆에 작게"). */
+  #siteHud{display:none;align-items:center;margin-left:6px}
+  #siteHud.on{display:inline-flex}
+  #hudMount{transform-origin:0 50%;transform:scaleX(.15);opacity:0;transition:transform .65s cubic-bezier(.22,1,.36,1) .05s,opacity .3s ease .05s}
+  #siteHud.grow #hudMount{transform:scaleX(1);opacity:1}
+  #siteHud .status-box{display:inline-flex;margin:0;padding:3px 12px 3px 8px;gap:6px}
+  #siteHud .status-box>.me-cluster{flex:0 0 auto}
+  #siteHud .status-box>.coin-pill{flex:0 0 auto}
+  #siteHud [data-oid="levelLabel"]{padding:2px 3px}
+  #siteHud [data-oid="levelLabel"] .rank-chick{width:20px;height:23px}
+  #siteHud .coin-pill,#siteHud .streak-pill{font-size:.8rem;padding:2px 3px}
+  #siteHud .status-divider{height:18px}
+  @media (max-width:640px){ .bar{flex-wrap:wrap} }
+  #hudMount [hidden]{display:none!important} /* the app enforces this globally; the clone needs it too, or the hidden sign-in pill / streak pill would show */
+  .status-box{max-width:100%}
+  .status-box .coin-pill,.status-box .user-pill{min-width:0;white-space:nowrap}
+  [data-oid="levelLabel"]{display:inline-flex;align-items:center;gap:7px;background:transparent;border:none;padding:4px 6px;font-weight:800;font-size:.9rem;color:var(--ink);cursor:pointer;font-family:inherit;flex:0 0 auto;white-space:nowrap}
+  [data-oid="levelLabel"] .rank-chick{width:26px;height:30px}
+  [data-oid="levelLabel"] .rank-chick svg{width:100%;height:100%;display:block}
+  .status-box{display:flex;align-items:center;gap:10px;background:var(--blue-soft);border:2px solid var(--blue);border-radius:999px;padding:6px 18px 6px 14px;box-sizing:border-box;overflow:hidden;flex:1 1 auto;justify-content:flex-start}
+  .status-box .coin-pill{flex:0 0 auto;justify-content:center;white-space:nowrap}
+  .status-box>.coin-pill,.status-box>.streak-pill,.status-box>.user-pill{flex:0 0 auto;justify-content:center}
+  .status-box>.user-pill{flex:0 1 auto;min-width:0;overflow:hidden;text-overflow:ellipsis}
+  .status-box>.me-cluster{flex:1 1 0;justify-content:center}
+  .status-box>.coin-pill{flex:1 1 0}
+  .status-box>.user-pill{flex:1 1 0;min-width:0}
+  .status-box>[data-oid="levelLabel"]{flex:0 0 auto}
+  .me-cluster{display:inline-flex;align-items:center;gap:9px;flex:0 0 auto;padding:0 2px}
+  .me-cluster .streak-pill{flex:0 0 auto;cursor:pointer}
+  .status-box>.status-divider{flex:0 0 auto}
+  .status-box .user-pill{flex:0 1 auto;min-width:0;justify-content:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+  [data-oid="loginBtn"]>span{display:block;min-width:0;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+  .status-divider{width:2px;height:24px;background:#e5e5e5;border-radius:2px;flex-shrink:0}
+  .rank-tap{cursor:pointer;flex-shrink:0;min-width:0}
+  .rank-tap span{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .coin-pill{display:inline-flex;align-items:center;gap:6px;background:transparent;border:none;padding:4px 6px;font-weight:800;font-size:.85rem;color:var(--accent);cursor:pointer;font-family:inherit;line-height:1.4}
+  .coin-pill:active{transform:scale(.95)}
+  .user-pill{display:inline-flex;align-items:center;gap:6px;background:transparent;border:none;padding:4px 6px;font-weight:800;font-size:.85rem;color:var(--muted);cursor:pointer;font-family:inherit;line-height:1.4;white-space:nowrap}
+  .user-pill:active{transform:scale(.95)}
+  .streak-pill{display:inline-flex;align-items:center;gap:4px;padding:4px 6px;font-weight:800;font-size:.85rem;color:#e8590c;white-space:nowrap;flex:0 0 auto;line-height:1.4;cursor:pointer}
+  @media (max-width:400px){
+    .status-box{gap:4px;padding:6px 8px 6px 6px}
+    .me-cluster{gap:5px;padding:0}
+    [data-oid="levelLabel"]{font-size:.82rem;padding:4px 1px}
+    .status-box .streak-pill{padding:4px 1px;gap:2px;font-size:.8rem}
+    .coin-pill{font-size:.76rem}
+    .user-pill{font-size:.74rem}
+    .status-box .coin-pill,.status-box .user-pill{padding:4px 2px}
+  }
+  .stage{flex:1 1 auto;display:flex;min-height:0}
+  .stage iframe{width:100%;height:100%;border:0;display:block;background:#fff}
 </style>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
 <script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
@@ -42,18 +97,19 @@
   <div class="wrap bar">
     <img src="chick.png" alt="Korean Steps chick mascot">
     <div class="brand">Korean <span>Steps</span></div>
+    <div id="siteHud"><div id="hudMount"></div></div>
     <div class="sp"></div>
     <nav class="menu">
       <a class="mlink" href="lessons.html">Lessons</a>
-      <a class="mlink" href="index.html#features">Features</a>
-      <a class="mlink" href="about.html">About</a>
+      <a class="mlink hideS" href="index.html#features">Features</a>
+      <a class="mlink hideS" href="about.html">About</a>
       <button class="mlink" id="siteLogin" type="button">Login</button>
       <a class="btn blue small" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Get the app</a>
     </nav>
   </div>
 </header>
 <div class="stage">
-  <iframe src="play.html?site=1" title="Korean Steps — learn Korean" allow="autoplay"></iframe>
+  <iframe id="appFrame" src="play.html?site=1" title="Korean Steps — learn Korean" allow="autoplay"></iframe>
 </div>
 <script>
 const FIREBASE_CONFIG = {
@@ -97,6 +153,55 @@ const FIREBASE_CONFIG = {
       });
     }
   }catch(e){}
+</script>
+<script>
+// Header status bar (Ben 2026-10-23): on login success the app's OWN blue
+// status bar appears in this header — a live clone of the framed app's
+// .status-box (ids swapped to data-oid, taps forwarded to the app's real
+// buttons) — growing in with a stretch animation. Signed out: it collapses
+// away and the app keeps its own bar.
+(function(){
+  var hud=document.getElementById('siteHud');
+  var mount=document.getElementById('hudMount');
+  var frame=document.getElementById('appFrame');
+  if(!hud||!mount||!frame) return;
+  var lastHTML='', hideTimer=null;
+  function doc(){ try{ return frame.contentDocument; }catch(e){ return null; } }
+  function sync(){
+    var d=doc(); if(!d) return;
+    try{
+      var sb=d.querySelector('.status-box'); if(!sb) return;
+      var c=sb.cloneNode(true);
+      var lb=c.querySelector('#loginBtn');
+      if(lb && lb.hidden){ var dv=lb.previousElementSibling; if(dv && dv.classList && dv.classList.contains('status-divider')) dv.remove(); }
+      var html=c.outerHTML.replace(/ id="/g,' data-oid="');
+      if(html!==lastHTML){ lastHTML=html; mount.innerHTML=html; }
+    }catch(e){}
+  }
+  mount.addEventListener('click', function(ev){
+    var t=(ev.target&&ev.target.closest)?ev.target.closest('[data-oid]'):null;
+    if(!t) return;
+    var d=doc(); if(!d) return;
+    var el=d.getElementById(t.getAttribute('data-oid'));
+    if(el) el.click();
+  });
+  function show(){
+    clearTimeout(hideTimer);
+    hud.classList.add('on');
+    sync();
+    requestAnimationFrame(function(){ requestAnimationFrame(function(){ hud.classList.add('grow'); }); });
+  }
+  function hide(){
+    hud.classList.remove('grow');
+    clearTimeout(hideTimer);
+    hideTimer=setTimeout(function(){ hud.classList.remove('on'); },700);
+  }
+  if(window.siteAuth){
+    window.siteAuth.onAuthStateChanged(function(user){ if(user) show(); else hide(); });
+  }
+  frame.addEventListener('load', sync);
+  setInterval(sync, 800);
+})();
 </script>
 </body>
 </html>

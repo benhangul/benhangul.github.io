@@ -238,6 +238,7 @@
     #levelLabel .rank-chick { width: 26px; height: 30px; }
     /* (settings opened from bottom nav) */
     .status-box { display: flex; align-items: center; gap: 10px; background: var(--blue-soft); border: 2px solid var(--blue); border-radius: 999px; padding: 6px 18px 6px 14px; box-sizing: border-box; max-width: 100%; overflow: hidden; }
+    body.site-authed .topline { display: none; } /* website lessons page only: once signed in, the site header carries the chick/streak/coin chips, so the in-app blue bar steps aside (Ben 2026-10-23) */
     .status-box .coin-pill { flex: 0 0 auto; justify-content: center; white-space: nowrap; }
     .status-box { flex: 1 1 auto; }
     .status-box > .coin-pill, .status-box > .streak-pill, .status-box > .user-pill { flex: 0 0 auto; justify-content: center; }
@@ -31905,6 +31906,7 @@ const FIX_SPOTS={
       fbAuth.onAuthStateChanged(user => {
         cloudUid = user ? user.uid : null;
         try{ window._fbUser = user || null; }catch(e){}
+        try{ if(/[?&]site=1/.test(location.search)) document.body.classList.toggle('site-authed', !!user); }catch(e){}
         renderLoginBtn(user);
         if(user) pullProgress(user.uid);
         else {

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy — Korean Steps: Learn Korean</title>
+<meta name="description" content="How Korean Steps handles your information: Google sign-in, learning progress, advertising, analytics, and how to request deletion of your data.">
+<link rel="icon" href="favicon.ico" sizes="any">
+<link rel="icon" type="image/png" sizes="32x32" href="favicon-32.png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --green:#58cc02; --green-dark:#46a302; --blue:#1cb0f6; --blue-dark:#1899d6;
+    --ink:#3c3c3c; --muted:#777; --line:#e5e5e5; --blue-soft:#ddf4ff; --cream:#fff8e9;
+  }
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:#fff}
+  .wrap{max-width:980px;margin:0 auto;padding:0 20px}
+  header{border-bottom:2px solid var(--line);position:sticky;top:0;background:rgba(255,255,255,.96);z-index:50}
+  .bar{display:flex;align-items:center;gap:12px;padding:10px 0}
+  .bar img{width:40px;height:40px;object-fit:contain}
+  .brand{font-weight:900;font-size:21px;letter-spacing:.2px}
+  .brand span{color:var(--green)}
+  .bar .sp{flex:1}
+  .menu{display:flex;align-items:center;gap:4px}
+  .menu a.mlink,.menu button.mlink{font-weight:900;font-size:15px;color:var(--ink);text-decoration:none;padding:8px 12px;border-radius:10px;background:none;border:0;cursor:pointer;font-family:inherit}
+  .menu a.mlink:hover,.menu button.mlink:hover{background:var(--blue-soft)}
+  .menu button.mlink:disabled{opacity:.55;cursor:default}
+  @media (max-width:560px){ .menu a.mlink,.menu button.mlink{padding:8px 7px;font-size:14px} .brand{font-size:18px} }
+  .btn{display:inline-block;background:var(--green);color:#fff;font-weight:900;text-decoration:none;
+       padding:12px 22px;border-radius:14px;box-shadow:0 4px 0 var(--green-dark);font-size:16px;border:0;cursor:pointer;font-family:inherit}
+  .btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--green-dark)}
+  .btn.blue{background:var(--blue);box-shadow:0 4px 0 var(--blue-dark)}
+  .btn.small{padding:9px 16px;font-size:14px}
+  main{max-width:720px}
+  .hero{display:flex;align-items:center;gap:18px;background:var(--cream);border:2px solid var(--line);border-radius:22px;padding:24px 26px;margin:34px 0 8px}
+  .hero img{width:74px;height:74px;object-fit:contain;flex:0 0 auto}
+  .hero h1{font-size:32px;font-weight:900;margin:0 0 4px}
+  .hero p{margin:0;font-size:16px;color:#8a6d3b;font-weight:700}
+  @media (max-width:560px){ .hero{padding:20px} .hero img{width:56px;height:56px} .hero h1{font-size:26px} }
+  section.card{border:2px solid var(--line);border-radius:20px;padding:22px 26px;margin:18px 0;background:#fff}
+  section.card h2{font-size:21px;font-weight:900;margin:0 0 10px}
+  section.card p{font-size:16.5px;line-height:1.65;color:#555;font-weight:600;margin:0 0 10px}
+  section.card p:last-child{margin-bottom:0}
+  section.card p strong{color:var(--ink)}
+  .sub{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:14px}
+  @media (max-width:640px){ .sub{grid-template-columns:1fr} }
+  .sub .mini{background:var(--blue-soft);border-radius:16px;padding:16px 18px}
+  .sub .mini h3{margin:0 0 6px;font-size:16.5px;font-weight:900;color:var(--ink)}
+  .sub .mini p{font-size:15.5px;margin:0;color:#3d5a68}
+  ul.checks{list-style:none;margin:6px 0 0;padding:0}
+  ul.checks li{font-size:16.5px;line-height:1.6;color:#555;font-weight:600;padding:7px 0 7px 34px;position:relative;border-top:1px dashed var(--line)}
+  ul.checks li:first-child{border-top:0}
+  ul.checks li::before{content:"✓";position:absolute;left:2px;top:7px;width:22px;height:22px;border-radius:50%;background:var(--green);color:#fff;font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center}
+  .chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:12px}
+  .chip{background:var(--cream);border:2px solid var(--line);border-radius:999px;padding:7px 14px;font-weight:800;font-size:14.5px;color:var(--ink)}
+  .delbox{background:#fff3f3;border:2px solid #ffc9c9;border-radius:16px;padding:16px 18px;margin-top:14px}
+  .delbox h3{margin:0 0 6px;font-size:16.5px;font-weight:900}
+  .delbox p{font-size:15.5px;margin:0;color:#6b4a4a}
+  a{color:var(--blue-dark);font-weight:800;text-decoration:none}
+  a:hover{text-decoration:underline}
+  footer{border-top:2px solid var(--line);margin-top:44px;padding:22px 0 34px;color:var(--muted);font-weight:600;font-size:14px}
+  footer a{color:var(--blue-dark);text-decoration:none;font-weight:800}
+</style>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/10.12.5/firebase-auth-compat.js"></script>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <img src="chick.png" alt="Korean Steps chick mascot">
+    <div class="brand">Korean <span>Steps</span></div>
+    <div class="sp"></div>
+    <nav class="menu">
+      <a class="mlink" href="lessons.html">Lessons</a>
+      <a class="mlink" href="about.html">About</a>
+      <button class="mlink" id="siteLogin" type="button">Login</button>
+      <a class="btn blue small" href="https://play.google.com/store/apps/details?id=com.benhangul.koreansteps">Get the app</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+<main>
+  <div class="hero">
+    <img src="chick.png" alt="Korean Steps chick mascot">
+    <div>
+      <h1>Privacy Policy 🔒</h1>
+      <p>How Korean Steps handles your information — in plain language.</p>
+    </div>
+  </div>
+
+  <section class="card">
+    <h2>📋 Overview</h2>
+    <p><strong>Korean Steps</strong> is a Korean language-learning app for English speakers, developed by Ben Hangul. The app uses Google services for sign-in, cloud progress syncing, advertising, analytics, and crash reporting.</p>
+    <p>By using Korean Steps, you acknowledge the practices described in this Privacy Policy.</p>
+  </section>
+
+  <section class="card">
+    <h2>📥 Information we collect</h2>
+    <p>The information collected depends on the features you use and the choices you make.</p>
+    <div class="sub">
+      <div class="mini">
+        <h3>🔐 Google account information</h3>
+        <p>If you use Google Sign-In, Firebase Authentication receives your name, email address, profile photo, and a unique account identifier.</p>
+      </div>
+      <div class="mini">
+        <h3>📚 Learning progress</h3>
+        <p>Completed lessons, quiz scores, and related progress data are stored in Firebase Firestore so your progress can be restored and synced.</p>
+      </div>
+      <div class="mini">
+        <h3>📣 Advertising identifier</h3>
+        <p>Google AdMob may access your device’s advertising ID and related device or ad-interaction information to provide and measure personalized advertising, subject to your settings and applicable consent choices.</p>
+      </div>
+      <div class="mini">
+        <h3>📊 Analytics and crash data</h3>
+        <p>Firebase may collect app activity, device and operating-system information, diagnostics, performance details, and crash logs to help identify issues and understand app use.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>✅ How we use information</h2>
+    <p>We use the information described above to:</p>
+    <ul class="checks">
+      <li>Authenticate your account and sync learning progress across devices.</li>
+      <li>Remember completed lessons and quiz results.</li>
+      <li>Display, personalize, and measure ads through Google AdMob.</li>
+      <li>Diagnose crashes, monitor performance, understand feature use, and improve the app.</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <h2>🤝 Third-party services</h2>
+    <p>Korean Steps relies on the following Google services. These providers may process information under their own terms and privacy practices.</p>
+    <div class="chips">
+      <span class="chip">Firebase Authentication</span>
+      <span class="chip">Firebase Firestore</span>
+      <span class="chip">Google AdMob</span>
+      <span class="chip">Firebase Analytics</span>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🗑️ Data retention &amp; deletion</h2>
+    <p>Account and learning-progress data is retained while it is needed to provide progress syncing and operate the app, unless a longer retention period is required by law. Third-party providers may retain advertising, analytics, or diagnostic information according to their own policies.</p>
+    <div class="delbox">
+      <h3>Request deletion</h3>
+      <p>Email <a href="mailto:benhangul.steps@gmail.com">benhangul.steps@gmail.com</a> to request deletion of your Korean Steps account data. Please send the request from the email address associated with your Google Sign-In so the account can be verified.</p>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>🧒 Children’s privacy</h2>
+    <p>Korean Steps is not directed to children under 13, and we do not knowingly collect personal information from children under 13. If you believe a child under 13 has provided personal information, contact us so we can take appropriate action, including deletion where applicable.</p>
+  </section>
+
+  <section class="card">
+    <h2>🛡️ Security</h2>
+    <p>We use reasonable administrative and technical measures designed to protect information. However, no method of electronic storage or transmission is completely secure, and absolute security cannot be guaranteed.</p>
+  </section>
+
+  <section class="card">
+    <h2>🔄 Changes to this policy</h2>
+    <p>We may update this Privacy Policy when the app, its services, or legal requirements change. The effective date at the top of this page will be revised when an updated policy takes effect.</p>
+  </section>
+
+  <section class="card">
+    <h2>✉️ Contact</h2>
+    <p>For questions about this Privacy Policy or how Korean Steps handles your information, contact: <a href="mailto:benhangul.steps@gmail.com">benhangul.steps@gmail.com</a></p>
+  </section>
+</main>
+</div>
+
+<footer>
+  <div class="wrap">
+    © 2026 Ben Hangul · Korean Steps (com.benhangul.koreansteps) · <a href="privacy.html">Privacy Policy</a><br>
+    Support: <a href="mailto:benhangul.steps@gmail.com">benhangul.steps@gmail.com</a>
+  </div>
+</footer>
+
+<script>
+const FIREBASE_CONFIG = {
+      apiKey: 'AIzaSyBeemXNPL9CqOtSKFFNBudBGAuDklgqBRg',
+      authDomain: 'korean-steps.firebaseapp.com',
+      projectId: 'korean-steps',
+      storageBucket: 'korean-steps.appspot.com',
+      messagingSenderId: '917121892105',
+      appId: '1:917121892105:android:737c1456b2573821ce9dd8'
+    };
+  var siteAuth=null;
+  try{
+    if(typeof firebase!=='undefined'){
+      if(!firebase.apps.length) firebase.initializeApp(FIREBASE_CONFIG);
+      siteAuth=firebase.auth();
+      var btn=document.getElementById('siteLogin');
+      if(btn){
+        siteAuth.getRedirectResult().catch(function(e){
+          var msg=String((e&&e.message)||'')+(e&&e.code?' [code '+e.code+']':'');
+          if(msg && !/cancel/i.test(msg)) alert('Sign-in failed: '+msg+'\n\nIf this mentions an unauthorized domain, add koreansteps.com in Firebase Console > Authentication > Settings > Authorized domains.');
+        });
+        siteAuth.onAuthStateChanged(function(user){
+          if(user){ btn.textContent='Sign out'; btn.title='Signed in as '+(user.email||''); }
+          else{ btn.textContent='Login'; btn.title=''; }
+          btn.disabled=false;
+        });
+        btn.addEventListener('click', function(){
+          if(siteAuth.currentUser){ siteAuth.signOut(); }
+          else{
+            btn.disabled=true;
+            siteAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider()).catch(function(e){
+              btn.disabled=false; alert('Sign-in failed: '+String((e&&e.message)||e));
+            });
+          }
+        });
+      }
+    }
+  }catch(e){}
+</script>
+</body>
+</html>
