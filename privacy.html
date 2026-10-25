@@ -211,16 +211,7 @@ const FIREBASE_CONFIG = {
           else{
             btn.disabled=true;
             var prov=new firebase.auth.GoogleAuthProvider();
-            siteAuth.signInWithPopup(prov).then(function(){ btn.disabled=false; }).catch(function(e){
-              var code=(e&&e.code)||'';
-              if(/popup-blocked|operation-not-supported-in-this-environment/.test(code)){
-                siteAuth.signInWithRedirect(prov).catch(function(e2){ btn.disabled=false; alert('Sign-in failed: '+String((e2&&e2.message)||e2)); });
-              }else if(/popup-closed-by-user|cancelled-popup-request/.test(code)){
-                btn.disabled=false;
-              }else{
-                btn.disabled=false; alert('Sign-in failed: '+String((e&&e.message)||e));
-              }
-            });
+            siteAuth.signInWithRedirect(prov).catch(function(e2){ btn.disabled=false; alert('Sign-in failed: '+String((e2&&e2.message)||e2)); });
           }
         });
       }
